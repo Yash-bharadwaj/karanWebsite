@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -53,13 +54,15 @@ export const FloatingNav = ({
         <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
-          <Link href="#home" className="flex flex-col leading-none select-none">
-            <span className="font-display font-extrabold uppercase tracking-tight text-slate-900 dark:text-white text-xl sm:text-2xl whitespace-nowrap">
-              Karan Bhatia
-            </span>
-            <span className="uppercase text-[10px] sm:text-xs tracking-[0.35em] text-slate-500 dark:text-neutral-400 whitespace-nowrap">
-              Emcee · Comedian · Entertainer
-            </span>
+          <Link href="#home" className="flex items-center leading-none select-none">
+            <Image
+              src="/KaranLogo.png"
+              alt="Karan Bhatia Logo"
+              width={180}
+              height={78}
+              className="h-8 sm:h-18 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav Items */}

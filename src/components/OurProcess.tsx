@@ -338,7 +338,7 @@ export function OurProcess() {
           </motion.div>
 
         {/* Premium Bento Grid under heading; reacts to toggle above */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -366,7 +366,7 @@ export function OurProcess() {
               </div>
             );
           })()}
-        </motion.div>
+        </motion.div> */}
 
         {/* Interactive Host Styles (commented out as requested)
         <div className="relative space-y-10">
