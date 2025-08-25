@@ -19,7 +19,7 @@ export function Layout({ children }: LayoutProps) {
           { name: "About", link: "#about", icon: <UserIcon className="h-4 w-4 text-neutral-500 dark:text-white" /> },
           { name: "Stories", link: "#stories" },
           { name: "Clients", link: "#clients" },
-          { name: "Process", link: "#process" },
+          // { name: "Process", link: "#process" },
           { name: "FAQ", link: "#faq" },
           { name: "Contact", link: "#contact", icon: <MessageIcon className="h-4 w-4 text-neutral-500 dark:text-white" /> },
         ]}

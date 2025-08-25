@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Award, Users, Calendar, Star, Zap, CheckCircle } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 
 export function AboutKaran() {
   return (
@@ -57,7 +59,7 @@ export function AboutKaran() {
               </div>
               
               {/* Floating Badge */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -72,7 +74,7 @@ export function AboutKaran() {
                     <p className="text-slate-500">Emcee & TV Presenter</p>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
 
@@ -129,34 +131,94 @@ export function AboutKaran() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
               viewport={{ once: true }}
-              className="space-y-4 text-slate-700"
+              className="space-y-4 text-slate-700 leading-relaxed"
             >
               <p className="text-lg leading-relaxed">
-                Dubai‑based professional emcee and TV presenter — known for
+                Karan Bhatia is a Dubai-based professional emcee and TV presenter, renowned for his
                 <span className="font-semibold text-slate-900"> dynamic stage presence</span> and
                 <span className="font-semibold text-slate-900"> exceptional crowd engagement</span>.
-                Sharp improv and impeccable comic timing keep audiences awake for the right reasons.
+                With sharp improv skills and impeccable comic timing, he ensures every audience stays captivated from the first moment to the last.
               </p>
 
-              <p className="text-lg leading-relaxed">
-                Specialised in
+              <p className="text-lg leading-relaxed ">
+                Specializing in
                 <span className="font-semibold text-slate-900"> corporate events</span>,
                 <span className="font-semibold text-slate-900"> weddings</span>,
                 <span className="font-semibold text-slate-900"> celebrity events</span>, and
-                <span className="font-semibold text-slate-900"> private celebrations</span> —
-                think tight show flow, smart humour, and zero awkward pauses.
+                <span className="font-semibold text-slate-900"> private celebrations</span>, Karan brings a perfect blend of professionalism, humor, and adaptability to every stage.
               </p>
+              </motion.div>
+              <p className="text-lg leading-relaxed">
+                He has been the <span className="font-semibold text-slate-900">trusted host</span> for leading brands such as
+                <span className="font-semibold text-slate-900"> Emirates Airlines</span>,
+                <span className=" text-slate-900"> DAMAC Properties</span>,
+                <span className="text-slate-900"> Al Naboodah Group</span>,
+                <span className="font-semibold text-slate-900"> Bank of Singapore</span>,
+                <span className="font-semibold text-slate-900"> Emirates NBD</span>,
+                <span className=" text-slate-900"> Premier Inn</span>,
+                <span className=" text-slate-900"> GEC Media</span>, and
+                <span className="font-semibold text-slate-900"> Ethiopian Airlines</span>, delivering events that are not just seamless, but truly memorable.
+              </p>
+            
 
-              <div className="border-l-4 border-red-600 pl-4 py-3 bg-red-50/50 rounded-r-lg">
-                <p className="text-lg italic text-slate-700">
-                  "Your energy, charm, and engaging style were truly the highlight of our EKAS event" 
-                  <span className="text-sm text-slate-500 ml-2">— Monika Bhatia, Emirates Airlines</span>
-                </p>
-              </div>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.75 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                {(() => {
+                  const [api, setApi] = useState<CarouselApi | null>(null);
+
+                  useEffect(() => {
+                    if (!api) return;
+                    const id = setInterval(() => {
+                      api.scrollNext();
+                    }, 5000);
+                    return () => clearInterval(id);
+                  }, [api]);
+
+                  return (
+                    <Carousel opts={{ align: "start", loop: true }} className="w-full" setApi={setApi}>
+                      <CarouselContent>
+                        {[
+                          {
+                            quote:
+                              "Your energy, charm, and engaging style were truly the highlight of our EKAS event",
+                            author: "Monika Bhatia",
+                            company: "Emirates Airlines",
+                          },
+                          {
+                            quote:
+                              "He made the Doctors laugh and the Doctors dance. Can you believe it?",
+                            author: "Dr Sanjay Parashar",
+                            company: "Celebrity Plastic Surgeon",
+                          },
+                          {
+                            quote: "You bought energy and vibes and made our wedding incredible; it wouldn't have been same without you",
+                            author: "Sabby",
+                            company: "Groom"
+                          },
+                         
+                        ].map((t, index) => (
+                          <CarouselItem key={index}>
+                            <div className="border-l-4 border-red-600 pl-4 py-3 bg-red-50/50 rounded-r-lg">
+                              <p className="text-lg italic text-slate-700">
+                                "{t.quote}"<span className="text-sm text-slate-500 ml-2">— {t.author}, {t.company}</span>
+                              </p>
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                    </Carousel>
+                  );
+                })()}
+            
+              </motion.div>
 
             {/* Key Highlights */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -190,7 +252,7 @@ export function AboutKaran() {
                   </motion.div>
                 );
               })}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </div>

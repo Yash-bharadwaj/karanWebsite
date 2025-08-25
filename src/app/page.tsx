@@ -9,8 +9,8 @@ import { HeroQuoteCarousel } from "@/components/HeroQuoteCarousel";
 import HeroImageBanner from "@/components/HeroImageBanner";
 import { OurProcess } from "@/components/OurProcess";
 import { AboutKaran } from "@/components/AboutKaran";
-import { Mic, Zap, Users, CheckCircle, Calendar, Mail, Loader2 } from "lucide-react";
-import InfiniteMovingCardsDemo from "@/components/infinite-moving-cards-demo";
+import { CheckCircle, Calendar, Loader2 } from "lucide-react";
+import Testimonials from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { BrandMarquee } from "@/components/BrandMarquee";
 
@@ -53,26 +53,11 @@ export default function Home() {
       {/* What Drives Us Section (Stories That Stick) */}
       <WhatDrivesUs />
 
-      {/* Clients Section */}
-      <section id="clients" className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-3"
-          >
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
-              Trusted by people who hate boring events
-            </h2>
-          </motion.div>
-        </div>
-        <InfiniteMovingCardsDemo />
-      </section>
+      {/* Premium Testimonials Section */}
+      <Testimonials />
 
       {/* Our Process Section (More Than a Mic) */}
-      <OurProcess />
+      {/* <OurProcess /> */}
 
    
 
@@ -125,12 +110,8 @@ export default function Home() {
         </div>
       </section>
       */}
-
-   {/* FAQ Section */}
-      <FAQ />
-
-      {/* Quote Carousel (moved below FAQ) */}
-      <HeroQuoteCarousel />
+       {/* Quote Carousel (moved below FAQ) */}
+      {/* <HeroQuoteCarousel /> */}
       {/* Conversion Section */}
       <section id="contact" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -237,9 +218,7 @@ export default function Home() {
                       {inlineSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                       Send Message
                     </button>
-                    <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-                      We’ll share a quick outline and hosting ideas within 24 hours — tailored to your event.
-                    </div>
+                   
                   </form>
                 ) : (
                   <div className="py-10 text-center">
@@ -272,6 +251,11 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+   {/* FAQ Section */}
+      <FAQ />
+
+     
     </Layout>
   );
 }
