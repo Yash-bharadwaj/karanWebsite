@@ -39,14 +39,14 @@ export default function Home() {
       {/* Brand marquee between About and Stories */}
       <BrandMarquee
         items={[
-          { name: "Emirates" },
-          { name: "DAMAC" },
-          { name: "Al Naboodah" },
-          { name: "Bank of Singapore" },
-          { name: "Emirates NBD" },
-          { name: "Premier Inn" },
-          { name: "GEC Media" },
-          { name: "Ethiopian Airlines" },
+          { name: "Emirates", logo: "/images/Logos/emirates.png" },
+          { name: "DAMAC", logo: "/images/Logos/damac.png" },
+          { name: "Al Naboodah", logo: "/images/Logos/ainaboodah.png" },
+          { name: "Bank of Singapore", logo: "/images/Logos/bos.png" },
+          { name: "Emirates NBD", logo: "/images/Logos/emirates.png" },
+          { name: "Premier Inn", logo: "/images/Logos/premierInn.png" },
+          { name: "GEC Media", logo: "/images/Logos/gec.png" },
+          { name: "Ethiopian Airlines", logo: "/images/Logos/ethiopian.png" },
         ]}
       />
 
