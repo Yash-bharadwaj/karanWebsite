@@ -14,46 +14,54 @@ import {
 
 type Slide = {
   src: string;
+  mobileSrc?: string;
   alt: string;
   showMessage?: boolean;
 };
 
 const slides: Slide[] = [
-    {
-        src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd.png",
-        alt: "Karan engaging the crowd 1",
-        showMessage: true,
-      },
-    {
-        src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd2.png",
-        alt: "Karan engaging the crowd 2",
-        showMessage: true,
-      },
-    {
-        src: "/images/Karan-Bhatia-Dubai-Emcee.png",
-        alt: "Karan Bhatia montage",
-      },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-1.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1m.png",
+    alt: "Karan engaging the crowd 1",
+    showMessage: true,
+  },
+  {
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2m.png",
+    alt: "Karan engaging the crowd 2",
+    showMessage: true,
+  },
+  {
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3m.png",
+    alt: "Karan Bhatia montage",
+  },
+  {
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4m.png",
     alt: "Karan Bhatia hosting 1",
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-2.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5m.png",
     alt: "Karan Bhatia hosting 2",
   },
   {
-    src: "/images/Karan-Bhatia.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6m.png",
     alt: "Karan Bhatia hosting 3",
   },
- 
+  {
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-7.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-7m.png",
+    alt: "Karan Bhatia hosting 4",
+  },
 ];
 
 export default function HeroImageBanner() {
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideAspectRatios, setSlideAspectRatios] = useState<number[]>(
-    Array(slides.length).fill(16 / 9)
-  );
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -95,24 +103,26 @@ export default function HeroImageBanner() {
           {slides.map((slide, index) => (
             <CarouselItem key={index}>
               <div
-                className="relative w-full overflow-hidden"
-                style={{ aspectRatio: slideAspectRatios[index] || 16 / 9 }}
+                className="relative w-full overflow-hidden aspect-[5/4] sm:aspect-[16/9] lg:aspect-[21/9]"
               >
+                {/* Mobile crop */}
+                <Image
+                  src={slide.mobileSrc ?? slide.src}
+                  alt={slide.alt}
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 640px) 100vw, 0px"
+                  className="object-cover object-center select-none sm:hidden"
+                  draggable={false}
+                />
+                {/* Desktop/Tablet crop */}
                 <Image
                   src={slide.src}
                   alt={slide.alt}
                   fill
                   priority={index === 0}
-                  sizes="100vw"
-                  className="object-cover object-center select-none"
-                  onLoadingComplete={(img) => {
-                    const ratio = img.naturalWidth / img.naturalHeight;
-                    setSlideAspectRatios((prev) => {
-                      const next = [...prev];
-                      next[index] = ratio;
-                      return next;
-                    });
-                  }}
+                  sizes="(max-width: 640px) 0px, 100vw"
+                  className="object-cover object-center select-none hidden sm:block"
                   draggable={false}
                 />
               </div>
@@ -124,18 +134,21 @@ export default function HeroImageBanner() {
         <CarouselNext className="hidden sm:flex right-3 md:right-6 bg-white/70 backdrop-blur hover:bg-white text-black border-0" />
       </Carousel>
 
-      {/* Fixed overlay message visible only for the first two slides */}
+      {/* Bottom caption message visible only for the first two slides */}
       {activeIndex <= 1 && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-2 z-20">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/60" />
-          <div className="relative w-full max-w-6xl text-center rounded-2xl px-5 py-4 sm:px-8 sm:py-6 backdrop-blur-xl shadow-2xl border border-white/20 bg-gradient-to-b from-neutral-900/55 to-neutral-900/35">
-            <p className="text-white font-display font-semibold tracking-wide text-base sm:text-xl md:text-3xl lg:text-4xl leading-relaxed">
-              <span className="block">Want your next event to be unforgettable?</span>
-              <span className="block mt-2">
-                <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-2 py-0.5">I’ll keep your crowd engaged, entertained & energized.</Highlight>
-                {" "}Just scroll through the photos and videos; you’ll feel the <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-2 py-0.5"> vibe in the smiles & laughter </Highlight>
-              </span>
-            </p>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center px-2 sm:px-3 pb-2 sm:pb-4 z-20">
+          {/* subtle bottom gradient for readability without covering the photo */}
+          <div className="absolute inset-x-0 bottom-0 h-24 sm:h-36 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+          <div className="relative w-full max-w-5xl mx-auto px-2 sm:px-3 flex justify-center">
+            <div className="inline-block text-center rounded-lg sm:rounded-xl px-2 py-1.5 sm:px-4 sm:py-3 bg-black/70 backdrop-blur-md border border-white/15 shadow-lg">
+              <p className="text-white font-display font-semibold tracking-wide text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
+                <span className="block text-sm sm:text-lg md:text-xl lg:text-4xl">Want your next event to be unforgettable?</span>
+                <span className="block mt-0.5 sm:mt-1.5">
+                  <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0">I’ll keep your crowd engaged, entertained & energized.</Highlight>
+                  {" "}Just scroll through the photos and videos; you’ll feel the <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0"> vibe in the smiles & laughter </Highlight>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       )}

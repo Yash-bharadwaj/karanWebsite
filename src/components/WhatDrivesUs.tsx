@@ -113,6 +113,9 @@ export function WhatDrivesUs() {
       <div className="w-full mt-4">
         <VideoStripSlider
           videos={[
+            { src: "/Doctors-karan-bhatia.mp4" },
+            { src: "/Emirates-Airlines-karan-bhatia.mp4" },
+            { src: "/Al-Naboodah-karan-bhatia.mp4" },
             { src: "/BigFatWeddingDubaiEmcee.mp4" },
             { src: "/Karan-bhatia-oberioVideo.mp4" },
             { src: "/7StartWedding.mp4" },
