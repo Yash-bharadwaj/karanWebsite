@@ -159,7 +159,7 @@ export default function Home() {
                   <div>
                     <h3 className="text-lg font-semibold text-foreground">Plan an unforgettable event</h3>
                     <p className="text-sm text-muted-foreground"></p>
-                    <p className="text-xs text-muted-foreground italic mt-1">Send me a message — I don't bite (usually).</p>
+                    <p className="text-xs text-muted-foreground italic mt-1">Slide into my DMs — You can write</p>
                   </div>
                 </div>
                 {!inlineSent ? (
