@@ -27,8 +27,8 @@ const slides: Slide[] = [
     showMessage: true,
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4m.png",
     alt: "Karan engaging the crowd 2",
     showMessage: true,
   },
@@ -38,8 +38,8 @@ const slides: Slide[] = [
     alt: "Karan Bhatia montage",
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2.png",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2m.png",
     alt: "Karan Bhatia hosting 1",
   },
   {
