@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 
 type Testimonial = {
@@ -42,93 +42,115 @@ const TESTIMONIALS: Testimonial[] = [
     role: "Groom",
   },
   {
-    quote: "This show wouldn’t have been half of what it was without you",
+    quote: "This show wouldn't have been half of what it was without you",
     name: "Fawaz Roshan",
     role: "Groom",
   },
 ];
 
 export function Testimonials() {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const loopItems = useMemo(
-    () => [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS],
-    []
-  );
-  const isPausedRef = useRef(false);
-
-  useEffect(() => {
-    const node = scrollRef.current;
-    if (!node) return;
-    let raf = 0;
-    let last = performance.now();
-    const speedPxPerMs = 0.06; // adjust smoothness/speed
-
-    const step = (now: number) => {
-      const dt = now - last;
-      last = now;
-      if (!isPausedRef.current) {
-        node.scrollLeft += speedPxPerMs * dt;
-      }
-      const resetPoint = node.scrollWidth / 3; // because we duplicated items thrice
-      if (node.scrollLeft >= resetPoint) {
-        node.scrollLeft = node.scrollLeft - resetPoint;
-      }
-      raf = requestAnimationFrame(step);
-    };
-
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+  const items = useMemo(() => {
+    const corporates = TESTIMONIALS.filter((t) => t.company);
+    const others = TESTIMONIALS.filter((t) => !t.company);
+    return [...corporates, ...others];
   }, []);
 
+  // Get specific testimonials for custom layout
+  const hrManager = items.find(t => t.role?.includes("HR Manager"));
+  const monika = items.find(t => t.name === "Monika Bhatia");
+  const sanjay = items.find(t => t.name === "Dr Sanjay Parashar");
+  const remaining = items.filter(t => ![hrManager, monika, sanjay].includes(t));
+
+  const Card = ({ testimonial, className = "" }: { testimonial: Testimonial; className?: string }) => {
+    const isCompact = className.includes('compact');
+    
+    return (
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className={`group relative bg-white dark:bg-neutral-900 rounded-lg border border-slate-200/60 dark:border-neutral-800/60 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col ${
+          isCompact 
+            ? 'p-2' 
+            : 'p-3'
+        } ${className}`}
+      >
+        {/* Decorative accent */}
+        <div className={`absolute top-0 h-0.5 bg-gradient-to-r from-red-500 to-rose-600 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+          isCompact ? 'left-2 right-2' : 'left-3 right-3'
+        }`} />
+        
+        {/* Quote */}
+        <div className={`mb-2 flex-1 ${isCompact ? 'mb-1' : 'mb-2'}`}>
+          <svg className={`text-slate-300 dark:text-neutral-700 fill-current ${
+            isCompact ? 'w-3 h-3 mb-1' : 'w-4 h-4 mb-1'
+          }`} viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+          <p className={`text-slate-700 dark:text-neutral-300 font-medium ${
+            isCompact ? 'text-xs leading-relaxed' : 'text-sm leading-relaxed'
+          }`}>
+            {testimonial.quote}
+          </p>
+        </div>
+
+        {/* Author info */}
+        <div className={`border-t border-slate-100 dark:border-neutral-800 pt-1 mt-auto`}>
+          <div className={`font-semibold text-slate-900 dark:text-white ${
+            isCompact ? 'text-xs' : 'text-sm'
+          }`}>
+            {testimonial.name}
+          </div>
+          {(testimonial.role || testimonial.company) && (
+            <div className={`text-slate-600 dark:text-neutral-400 ${
+              isCompact ? 'text-[8px]' : 'text-xs'
+            }`}>
+              {[testimonial.role, testimonial.company].filter(Boolean).join(" · ")}
+            </div>
+          )}
+        </div>
+      </motion.article>
+    );
+  };
+
   return (
-    <section id="clients" className="py-16 sm:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
+    <section id="clients" className="py-8 sm:py-12 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-6 sm:mb-8">
           <motion.h2
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-4xl sm:text-5xl font-display font-semibold text-foreground tracking-tight leading-tight"
+            className="text-2xl sm:text-3xl font-display font-semibold text-foreground tracking-tight leading-tight"
           >
             Trusted by teams who value <span className="rainbow-text">engaging events</span>
           </motion.h2>
-          {/* <div className="mt-3 mx-auto h-1.5 w-28 bg-gradient-to-r from-red-500 to-red-700 rounded-full" /> */}
+          <div className="mt-2 h-1 w-16 mx-auto bg-gradient-to-r from-red-500 to-rose-600 rounded-full" />
         </div>
 
-        {/* Horizontal carousel, single row */}
-        <div className="relative">
-          <div
-            ref={scrollRef}
-            onMouseEnter={() => (isPausedRef.current = true)}
-            onMouseLeave={() => (isPausedRef.current = false)}
-            onTouchStart={() => (isPausedRef.current = true)}
-            onTouchEnd={() => (isPausedRef.current = false)}
-            className="flex gap-4 sm:gap-6 overflow-hidden pb-2 pr-2"
-          >
-            {loopItems.map((t, i) => (
-              <motion.article
-                key={i}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: i * 0.03 }}
-                className="flex-none w-[85vw] sm:w-[420px] lg:w-[560px] rounded-2xl border border-red-100 bg-gradient-to-br from-white via-red-50 to-red-100 p-6 shadow-sm hover:shadow-md transition"
-              >
-                <p className="italic text-base sm:text-lg text-foreground leading-relaxed">{t.quote}</p>
-                <div className="mt-4">
-                  <div className="text-sm font-semibold text-foreground">{t.name}</div>
-                  {(t.role || t.company) && (
-                    <div className="text-sm text-muted-foreground">{[t.role, t.company].filter(Boolean).join(" · ")}</div>
-                  )}
-                </div>
-              </motion.article>
-            ))}
+        {/* Custom layout for top section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-4">
+          {/* Left: HR Manager - full height */}
+          {hrManager && (
+            <div className="lg:row-span-2">
+              <Card testimonial={hrManager} className="h-full" />
+            </div>
+          )}
+          
+          {/* Right: Monika and Sanjay stacked */}
+          <div className="grid grid-rows-2 gap-2">
+            {monika && <Card testimonial={monika} className="compact" />}
+            {sanjay && <Card testimonial={sanjay} className="compact" />}
           </div>
+        </div>
 
-          {/* subtle gradient edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-white to-transparent" />
+        {/* Bottom row with remaining testimonials */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
+          {remaining.map((testimonial, index) => (
+            <Card key={index} testimonial={testimonial} />
+          ))}
         </div>
       </div>
     </section>

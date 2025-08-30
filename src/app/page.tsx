@@ -127,12 +127,12 @@ export default function Home() {
                 Let’s Not <span className="text-red-600">Bore Your Guests</span>
               </h2>
               <p className="text-muted-foreground mb-6 max-w-xl">
-                Book me and I’ll keep the room awake, the run of show tight, and the client convinced it was their idea.
+              Book me and I'll keep the room awake, the run of the show tight and the management team proud.
               </p>
               <ul className="space-y-3">
                 {[
                   "No awkward pauses — just well‑timed chaos.",
-                  "Crowd work that won’t get HR (too) nervous.",
+                  "Crowd work that won’t get HR nervous.",
                   "Timing so tight even the AV team smiles.",
                 ].map((line) => (
                   <li key={line} className="flex items-start gap-3">

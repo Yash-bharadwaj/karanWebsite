@@ -130,24 +130,22 @@ export default function HeroImageBanner() {
         <CarouselNext className="hidden sm:flex right-3 md:right-6 bg-white/70 backdrop-blur hover:bg-white text-black border-0" />
       </Carousel>
 
-      {/* Bottom caption message visible only for the first two slides */}
+      {/* Main question in the middle of the carousel - only for first two slides */}
       {activeIndex <= 1 && (
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center px-2 sm:px-3 pb-2 sm:pb-4 z-20">
-          {/* subtle bottom gradient for readability without covering the photo */}
-          <div className="absolute inset-x-0 bottom-0 h-24 sm:h-36 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-          <div className="relative w-full max-w-5xl mx-auto px-2 sm:px-3 flex justify-center">
-            <div className="inline-block text-center rounded-lg sm:rounded-xl px-2 py-1.5 sm:px-4 sm:py-3 bg-black/70 backdrop-blur-md border border-white/15 shadow-lg">
-              <p className="text-white font-display font-semibold tracking-wide text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
-                <span className="block text-sm sm:text-lg md:text-xl lg:text-4xl">Want your next event to be unforgettable?</span>
-                <span className="block mt-0.5 sm:mt-1.5">
-                  <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0">I’ll keep your crowd engaged, entertained & energized.</Highlight>
-                  {" "}Just scroll through the photos and videos; you’ll feel the <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0"> vibe in the smiles & laughter </Highlight>
-                </span>
-              </p>
-            </div>
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-4 z-20">
+          <div className="inline-block text-center rounded-lg sm:rounded-xl px-4 py-2 sm:px-6 sm:py-3 bg-black/80 backdrop-blur-sm shadow-lg">
+            <p className="text-white font-display font-bold tracking-wide text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-tight mb-2">
+              Want your next event to be unforgettable?
+            </p>
+            <p className="text-white font-display font-semibold tracking-wide text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
+              <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0">I'll keep your crowd engaged, entertained & energized.</Highlight>
+              {" "}Just scroll through the photos and videos; you'll feel the <Highlight className="text-white from-red-500 to-rose-600 dark:from-red-600 dark:to-rose-700 px-1 py-0"> vibe in the smiles & laughter </Highlight>
+            </p>
           </div>
         </div>
       )}
+
+
     </section>
   );
 }
