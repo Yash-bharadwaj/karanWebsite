@@ -35,7 +35,7 @@ export default function FloatingInstagram() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.0 }}
         className="w-12 h-12 rounded-full shadow-lg bg-gradient-to-br from-[#25D366] to-[#128C7E] hover:from-[#2fe073] hover:to-[#0e7b70] transition-colors flex items-center justify-center"
-        title="Slide into my DMs — You can write"
+        title="WhatsApp me — Get in touch"
         aria-label="Open enquiry form via WhatsApp style"
       >
         <FaWhatsapp className="h-6 w-6 text-white" />

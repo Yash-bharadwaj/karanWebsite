@@ -55,14 +55,8 @@ export function Testimonials() {
     return [...corporates, ...others];
   }, []);
 
-  // Get specific testimonials for custom layout
-  const hrManager = items.find(t => t.role?.includes("HR Manager"));
-  const monika = items.find(t => t.name === "Monika Bhatia");
-  const sanjay = items.find(t => t.name === "Dr Sanjay Parashar");
-  const remaining = items.filter(t => ![hrManager, monika, sanjay].includes(t));
-
-  const Card = ({ testimonial, className = "" }: { testimonial: Testimonial; className?: string }) => {
-    const isCompact = className.includes('compact');
+  const Card = ({ testimonial }: { testimonial: Testimonial }) => {
+    const isWide = testimonial.name === "Chanpreet Kaur";
     
     return (
       <motion.article
@@ -70,42 +64,30 @@ export function Testimonials() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className={`group relative bg-white dark:bg-neutral-900 rounded-lg border border-slate-200/60 dark:border-neutral-800/60 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col ${
-          isCompact 
-            ? 'p-2' 
-            : 'p-3'
-        } ${className}`}
+        className={`group relative bg-white dark:bg-neutral-900 rounded-lg border border-slate-200/60 dark:border-neutral-800/60 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-[200px] p-4 ${
+          isWide ? 'min-w-[400px]' : 'min-w-[280px]'
+        }`}
       >
         {/* Decorative accent */}
-        <div className={`absolute top-0 h-0.5 bg-gradient-to-r from-red-500 to-rose-600 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-          isCompact ? 'left-2 right-2' : 'left-3 right-3'
-        }`} />
+        <div className="absolute top-0 h-0.5 bg-gradient-to-r from-red-500 to-rose-600 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 left-4 right-4" />
         
         {/* Quote */}
-        <div className={`mb-2 flex-1 ${isCompact ? 'mb-1' : 'mb-2'}`}>
-          <svg className={`text-slate-300 dark:text-neutral-700 fill-current ${
-            isCompact ? 'w-3 h-3 mb-1' : 'w-4 h-4 mb-1'
-          }`} viewBox="0 0 24 24">
+        <div className="mb-3 flex-1">
+          <svg className="text-slate-300 dark:text-neutral-700 fill-current w-4 h-4 mb-2" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
-          <p className={`text-slate-700 dark:text-neutral-300 font-medium ${
-            isCompact ? 'text-xs leading-relaxed' : 'text-sm leading-relaxed'
-          }`}>
+          <p className="text-slate-700 dark:text-neutral-300 font-medium text-sm leading-relaxed line-clamp-4">
             {testimonial.quote}
           </p>
         </div>
 
         {/* Author info */}
-        <div className={`border-t border-slate-100 dark:border-neutral-800 pt-1 mt-auto`}>
-          <div className={`font-semibold text-slate-900 dark:text-white ${
-            isCompact ? 'text-xs' : 'text-sm'
-          }`}>
+        <div className="border-t border-slate-100 dark:border-neutral-800 pt-2 mt-auto">
+          <div className="font-semibold text-slate-900 dark:text-white text-sm">
             {testimonial.name}
           </div>
           {(testimonial.role || testimonial.company) && (
-            <div className={`text-slate-600 dark:text-neutral-400 ${
-              isCompact ? 'text-[8px]' : 'text-xs'
-            }`}>
+            <div className="text-slate-600 dark:text-neutral-400 text-xs">
               {[testimonial.role, testimonial.company].filter(Boolean).join(" · ")}
             </div>
           )}
@@ -116,7 +98,7 @@ export function Testimonials() {
 
   return (
     <section id="clients" className="py-8 sm:py-12 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <motion.h2
             initial={{ opacity: 0, y: 8 }}
@@ -130,27 +112,29 @@ export function Testimonials() {
           <div className="mt-2 h-1 w-16 mx-auto bg-gradient-to-r from-red-500 to-rose-600 rounded-full" />
         </div>
 
-        {/* Custom layout for top section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-4">
-          {/* Left: HR Manager - full height */}
-          {hrManager && (
-            <div className="lg:row-span-2">
-              <Card testimonial={hrManager} className="h-full" />
-            </div>
-          )}
-          
-          {/* Right: Monika and Sanjay stacked */}
-          <div className="grid grid-rows-2 gap-2">
-            {monika && <Card testimonial={monika} className="compact" />}
-            {sanjay && <Card testimonial={sanjay} className="compact" />}
+        {/* Horizontal scrollable testimonials */}
+        <div className="relative">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" id="testimonials-scroll">
+            {items.map((testimonial, index) => (
+              <Card key={index} testimonial={testimonial} />
+            ))}
           </div>
-        </div>
-
-        {/* Bottom row with remaining testimonials */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
-          {remaining.map((testimonial, index) => (
-            <Card key={index} testimonial={testimonial} />
-          ))}
+          
+          {/* Scroll button positioned on the right */}
+          <button
+            onClick={() => {
+              const container = document.getElementById('testimonials-scroll');
+              if (container) {
+                container.scrollBy({ left: 300, behavior: 'smooth' });
+              }
+            }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-10 h-10 text-slate-600 dark:text-neutral-400 hover:text-slate-800 dark:hover:text-neutral-200 transition-colors duration-200"
+            aria-label="Scroll right to see more testimonials"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

@@ -130,8 +130,8 @@ export default function HeroImageBanner() {
         <CarouselNext className="hidden sm:flex right-3 md:right-6 bg-white/70 backdrop-blur hover:bg-white text-black border-0" />
       </Carousel>
 
-      {/* Main question in the middle of the carousel - only for first two slides */}
-      {activeIndex <= 1 && (
+      {/* Main question in the middle of the carousel - only for first slide */}
+      {activeIndex === 0 && (
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-4 z-20">
           <div className="inline-block text-center rounded-lg sm:rounded-xl px-4 py-2 sm:px-6 sm:py-3 bg-black/80 backdrop-blur-sm shadow-lg">
             <p className="text-white font-display font-bold tracking-wide text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-tight mb-2">

@@ -20,7 +20,7 @@ export default function LeadCaptureModal() {
   const [form, setForm] = useState<FormState>({ name: "", whatsapp: "", eventDate: "", details: "" });
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsOpen(true), 20000);
+    const timer = setTimeout(() => setIsOpen(true), 50000);
     const toggle = () => setIsOpen((v) => !v);
     window.addEventListener("lead-modal:toggle", toggle as EventListener);
     return () => {
