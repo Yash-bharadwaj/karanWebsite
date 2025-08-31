@@ -114,7 +114,7 @@ export function WhatDrivesUs() {
         <VideoStripSlider
           videos={[
             { src: "/Doctors-karan-bhatia.mp4" },
-            { src: "/Emirates-Airlines-karan-bhatia.mp4" },
+            { src: "/Emirates-Airlines-karan-bhatia.mp4", startTime: 17 },
             { src: "/Al-Naboodah-karan-bhatia.mp4" },
             { src: "/BigFatWeddingDubaiEmcee.mp4" },
             { src: "/Karan-bhatia-oberioVideo.mp4" },

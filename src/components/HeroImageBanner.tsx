@@ -63,13 +63,13 @@ export default function HeroImageBanner() {
   useEffect(() => {
     if (!api) return;
 
-    const durationsMs = slides.map((s, idx) => (idx <= 1 ? 9000 : 5500));
+    const durationsMs = slides.map((s, idx) => (idx === 0 ? 6500 : 3300));
 
     const schedule = () => {
       if (!api) return;
       const index = api.selectedScrollSnap();
       setActiveIndex(index);
-      const wait = durationsMs[index] ?? 5500;
+      const wait = durationsMs[index] ?? 4000;
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => api.scrollNext(), wait);
     };

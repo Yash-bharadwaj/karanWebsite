@@ -81,7 +81,7 @@ export default function LeadCaptureModal() {
                     
                   </p>
                   <p className="text-xs text-muted-foreground italic mt-1">
-                    Slide into my DMs — Get in touch
+                    Slide into my DMs
                   </p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">

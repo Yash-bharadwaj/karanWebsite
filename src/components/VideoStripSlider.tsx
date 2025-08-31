@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +14,7 @@ export type VideoSlide = {
   src: string;
   poster?: string;
   title?: string;
+  startTime?: number;
 };
 
 type VideoStripSliderProps = {
@@ -26,12 +27,54 @@ export default function VideoStripSlider({
   autoAdvanceMs = 8000,
 }: VideoStripSliderProps) {
   const [api, setApi] = useState<CarouselApi | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     if (!api) return;
     const id = setInterval(() => api.scrollNext(), autoAdvanceMs);
     return () => clearInterval(id);
   }, [api, autoAdvanceMs]);
+
+  // Set start time for videos when they become visible
+  useEffect(() => {
+    const handleSlideChange = () => {
+      if (!api) return;
+      
+      const currentIndex = api.selectedScrollSnap();
+      const currentVideo = videoRefs.current[currentIndex];
+      
+      if (currentVideo && videos[currentIndex]?.startTime) {
+        currentVideo.currentTime = videos[currentIndex].startTime!;
+      }
+    };
+
+    if (api) {
+      api.on('select', handleSlideChange);
+      return () => {
+        api.off('select', handleSlideChange);
+      };
+    }
+  }, [api, videos]);
+
+  // Set start time for videos when they first load
+  useEffect(() => {
+    const handleVideoLoad = (video: HTMLVideoElement, startTime: number) => {
+      if (video.readyState >= 1) {
+        video.currentTime = startTime;
+      } else {
+        video.addEventListener('loadedmetadata', () => {
+          video.currentTime = startTime;
+        }, { once: true });
+      }
+    };
+
+    // Set start time for all videos that have startTime defined
+    videos.forEach((video, index) => {
+      if (video.startTime && videoRefs.current[index]) {
+        handleVideoLoad(videoRefs.current[index]!, video.startTime);
+      }
+    });
+  }, [videos]);
 
   return (
     <div className="relative w-full">
@@ -44,6 +87,9 @@ export default function VideoStripSlider({
             >
               <div className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] bg-black rounded-3xl overflow-hidden shadow-2xl">
                 <video
+                  ref={(el) => {
+                    videoRefs.current[idx] = el;
+                  }}
                   src={v.src}
                   poster={v.poster}
                   autoPlay
