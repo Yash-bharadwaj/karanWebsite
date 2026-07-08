@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import LeadCaptureModal from "@/components/LeadCaptureModal";
@@ -21,7 +21,11 @@ export const metadata: Metadata = {
   description: "Karan Bhatia - Dubai-based professional emcee and TV presenter, renowned for dynamic stage presence and exceptional crowd engagement.",
   keywords: ["emcee", "tv presenter", "event host", "comedian", "corporate events", "weddings", "celebrity events", "dubai emcee"],
   authors: [{ name: "Karan Bhatia" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

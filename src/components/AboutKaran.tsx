@@ -2,8 +2,57 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Award, Users, Calendar, Star, Zap, CheckCircle } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
+
+const testimonials = [
+  {
+    quote:
+      "Your energy, charm, and engaging style were truly the highlight of our EKAS event",
+    author: "Monika Bhatia",
+    company: "Emirates Airlines",
+  },
+  {
+    quote: "He made the Doctors laugh and the Doctors dance. Can you believe it?",
+    author: "Dr Sanjay Parashar",
+    company: "Celebrity Plastic Surgeon",
+  },
+  {
+    quote:
+      "You bought energy and vibes and made our wedding incredible; it wouldn't have been same without you",
+    author: "Sabby",
+    company: "Groom",
+  },
+];
+
+function TestimonialCarousel() {
+  const [api, setApi] = useState<CarouselApi | null>(null);
+
+  useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => {
+      api.scrollNext();
+    }, 5000);
+    return () => clearInterval(id);
+  }, [api]);
+
+  return (
+    <Carousel opts={{ align: "start", loop: true }} className="w-full" setApi={setApi}>
+      <CarouselContent>
+        {testimonials.map((t, index) => (
+          <CarouselItem key={index}>
+            <div className="border-l-4 border-red-600 pl-4 py-3 bg-red-50/50 rounded-r-lg">
+              <p className="text-lg italic text-slate-700">
+                "{t.quote}"<span className="text-sm text-slate-500 ml-2">— {t.author}, {t.company}</span>
+              </p>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
+  );
+}
 
 export function AboutKaran() {
   return (
@@ -50,11 +99,14 @@ export function AboutKaran() {
             {/* Photo Container */}
             <div className="relative">
               {/* Karan's Photo */}
-              <div className="aspect-[4/5] bg-gradient-to-br from-red-100 to-pink-100 rounded-2xl shadow-2xl border border-red-200/50 overflow-hidden">
-                <img 
-                  src="/images/Karan-Bhatia-host.png" 
+              <div className="aspect-[4/5] bg-gradient-to-br from-red-100 to-pink-100 rounded-2xl shadow-2xl border border-red-200/50 overflow-hidden relative">
+                <Image
+                  src="/images/Karan-Bhatia-host.webp"
                   alt="Karan Bhatia - Professional Emcee and TV Presenter"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  loading="lazy"
                 />
               </div>
               
@@ -168,53 +220,7 @@ export function AboutKaran() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                {(() => {
-                  const [api, setApi] = useState<CarouselApi | null>(null);
-
-                  useEffect(() => {
-                    if (!api) return;
-                    const id = setInterval(() => {
-                      api.scrollNext();
-                    }, 5000);
-                    return () => clearInterval(id);
-                  }, [api]);
-
-                  return (
-                    <Carousel opts={{ align: "start", loop: true }} className="w-full" setApi={setApi}>
-                      <CarouselContent>
-                        {[
-                          {
-                            quote:
-                              "Your energy, charm, and engaging style were truly the highlight of our EKAS event",
-                            author: "Monika Bhatia",
-                            company: "Emirates Airlines",
-                          },
-                          {
-                            quote:
-                              "He made the Doctors laugh and the Doctors dance. Can you believe it?",
-                            author: "Dr Sanjay Parashar",
-                            company: "Celebrity Plastic Surgeon",
-                          },
-                          {
-                            quote: "You bought energy and vibes and made our wedding incredible; it wouldn't have been same without you",
-                            author: "Sabby",
-                            company: "Groom"
-                          },
-                         
-                        ].map((t, index) => (
-                          <CarouselItem key={index}>
-                            <div className="border-l-4 border-red-600 pl-4 py-3 bg-red-50/50 rounded-r-lg">
-                              <p className="text-lg italic text-slate-700">
-                                "{t.quote}"<span className="text-sm text-slate-500 ml-2">— {t.author}, {t.company}</span>
-                              </p>
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                    </Carousel>
-                  );
-                })()}
-            
+                <TestimonialCarousel />
               </motion.div>
 
             {/* Key Highlights */}

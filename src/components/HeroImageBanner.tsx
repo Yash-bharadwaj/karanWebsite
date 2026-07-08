@@ -21,35 +21,35 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-1m.webp",
     alt: "Karan engaging the crowd 1",
     showMessage: true,
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-2m.webp",
     alt: "Karan engaging the crowd 2",
     showMessage: true,
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-3m.webp",
     alt: "Karan Bhatia montage",
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-4m.webp",
     alt: "Karan Bhatia hosting 1",
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-5m.webp",
     alt: "Karan Bhatia hosting 2",
   },
   {
-    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6.png",
-    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6m.png",
+    src: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6.webp",
+    mobileSrc: "/images/Karan-Bhatia-Dubai-Emcee-Crowd-6m.webp",
     alt: "Karan Bhatia hosting 3",
   },
   
